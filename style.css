@@ -1,0 +1,104 @@
+/* ================= Header ================= */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* ================= Logo ================= */
+.logo svg {
+  width: 50px;
+  height: 50px;
+}
+
+/* ================= Navigation ================= */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+/* ================= Container ================= */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ================= Section LINE OA ================= */
+#line-oa-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.text-column {
+  flex: 1;
+  min-width: 300px;
+}
+
+.text-column h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.text-column p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.text-column .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-right: 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn-outlined {
+  border: 2px solid #4CAF50;
+  color: #4CAF50;
+}
+
+.btn-primary {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+}
+
+.image-column {
+  flex: 1;
+  min-width: 300px;
+}
+
+.image-column img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ================= Responsive ================= */
+@media (max-width: 768px) {
+  #line-oa-section {
+    flex-direction: column;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
