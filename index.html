@@ -3,166 +3,246 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>เว็บตัวอย่าง</title>
-  <!-- ลิงก์ไฟล์ CSS -->
-  <link rel="stylesheet" href="style.css">
+  <title>เว็บตัวอย่างสมบูรณ์</title>
+
+  <!-- Owl Carousel CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"/>
+
+  <style>
+    /* ป้องกัน CSS ชนกับเว็บหลัก */
+    body {
+      margin: 0;
+      font-family: "Kanit", sans-serif;
+      background: #fff;
+      color: #333;
+    }
+
+    header {
+      background: #06C755;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 40px 20px;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .text-column {
+      flex: 1 1 400px;
+      max-width: 500px;
+    }
+
+    .text-column h2 {
+      margin-bottom: 15px;
+      font-size: 24px;
+      color: #06C755;
+    }
+
+    .text-column p {
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 18px;
+      border-radius: 8px;
+      margin-right: 10px;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .btn-outlined {
+      border: 2px solid #06C755;
+      color: #06C755;
+      background: #fff;
+    }
+
+    .btn-primary {
+      background: #06C755;
+      color: #fff;
+    }
+
+    .image-column img {
+      max-width: 400px;
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    /* Discover Section */
+    .discover {
+      padding: 50px 20px;
+      background: #f4f4f4;
+    }
+
+    .discover .heading-large {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .discover .body-large {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    /* Carousel Cards */
+    .owl-carousel .item {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+
+    .owl-carousel .item:hover {
+      transform: translateY(-5px);
+    }
+
+    .owl-carousel .item img {
+      width: 100%;
+      display: block;
+    }
+
+    .item .content {
+      padding: 15px;
+    }
+
+    .item .content h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #06C755;
+    }
+
+    .btn-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      color: #06C755;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .btn-arrow svg {
+      width: 16px;
+      height: 16px;
+    }
+  </style>
 </head>
 <body>
 
+  <!-- Header -->
   <header>
     <h1>เว็บตัวอย่าง</h1>
   </header>
 
+  <!-- Section LINE OA -->
   <div class="container">
-
-    <!-- ====== Section LINE Official Account ====== -->
-    <section id="line-oa-section">
-      <div class="text-column">
-        <h2>LINE Official Account</h2>
-        <p>คือบัญชีทางการสำหรับธุรกิจที่ช่วยให้ร้านค้าสามารถสร้างฐานผู้ติดตามไม่จำกัด เพื่อส่งข้อมูลทางการตลาด โปรโมชั่นพิเศษ รวมถึงสื่อสารแบบรายบุคคลกับลูกค้า</p>
-        <div>
-          <a href="https://lineforbusiness.com/th/service/line-oa-features/broadcast-message" target="_blank" class="btn btn-outlined">ดูราคาแพ็กเกจ</a>
-          <a href="https://entry.line.biz/form/entry/unverified" target="_blank" class="btn btn-primary">สมัครบัญชีทางการเลย</a>
-        </div>
+    <div class="text-column">
+      <h2>LINE Official Account</h2>
+      <p>คือบัญชีทางการสำหรับธุรกิจที่ช่วยให้ร้านค้าสามารถสร้างฐานผู้ติดตามไม่จำกัด เพื่อส่งข้อมูลทางการตลาด โปรโมชั่นพิเศษ รวมถึงสื่อสารแบบรายบุคคลกับลูกค้า</p>
+      <div>
+        <a href="https://lineforbusiness.com/th/service/line-oa-features/broadcast-message" target="_blank" class="btn btn-outlined">ดูราคาแพ็กเกจ</a>
+        <a href="https://entry.line.biz/form/entry/unverified" target="_blank" class="btn btn-primary">สมัครบัญชีทางการเลย</a>
       </div>
- <div class="image-column">
-  <!-- Desktop image -->
-  <img id="desktop-image" src="https://firebasestorage.googleapis.com/v0/b/sekkport.appspot.com/o/215215.png?alt=media&token=2116a5a3-060d-4fae-a935-e6aeb12b27b7" alt="LINE OA Desktop">
-
-  <!-- Mobile image -->
- 
-</div>
-
-    </section>
-
+    </div>
+    <div class="image-column">
+      <img src="https://firebasestorage.googleapis.com/v0/b/sekkport.appspot.com/o/215215.png?alt=media&token=2116a5a3-060d-4fae-a935-e6aeb12b27b7" alt="LINE OA Desktop">
+    </div>
   </div>
 
-  <div class="discover padding gray" id="object-cover">
-  <div class="section-content">
-    <div class="t-01">
-      <div>
-        <p class="heading-large">
-          เรียนรู้ความสำเร็จในจากการใช้บัญชีทางการจากแบรนด์ดัง
-        </p>
-        <p style="height:16px"></p>
-        <p class="body-large">
-          บัญชีทางการช่วยให้ธุรกิจของคุณเข้าถึงกลุ่มลูกค้าที่ต้องการ
-          และช่วยทำให้คุณเข้าถึงเป้าหมายทางธุรกิจได้ตามต้องการ
-          เราคัดเรื่องราวความสำเร็จของแบรนด์เหล่านี้เพื่อเป็นแรงบันดาล
-          ในการนำมาใช้ต่อยอดธุรกิจของคุณ
-        </p>
+  <!-- Discover Section -->
+  <div class="discover">
+    <div class="section-content">
+      <p class="heading-large">เรียนรู้ความสำเร็จในจากการใช้บัญชีทางการจากแบรนด์ดัง</p>
+      <p class="body-large">
+        บัญชีทางการช่วยให้ธุรกิจของคุณเข้าถึงกลุ่มลูกค้าที่ต้องการ
+        และช่วยทำให้คุณเข้าถึงเป้าหมายทางธุรกิจได้ตามต้องการ
+        เราคัดเรื่องราวความสำเร็จของแบรนด์เหล่านี้เพื่อเป็นแรงบันดาล
+        ในการนำมาใช้ต่อยอดธุรกิจของคุณ
+      </p>
+    </div>
+
+    <!-- Carousel -->
+    <div class="owl-carousel">
+      <!-- Card 1 -->
+      <div class="item">
+        <img src="https://picsum.photos/id/1011/400/250" alt="NPP BOX">
+        <div class="content">
+          <h2>NPP BOX</h2>
+          <p>ชุบชีวิตธุรกิจครอบครัวให้โตด้วยออนไลน์</p>
+          <div class="btn-arrow">
+            ดูเพิ่มเติม
+            <svg viewBox="0 0 20 21" fill="#06C755" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M17.9395 10.8057C18.0205 10.6107 18.0205 10.3907 17.9395 10.1957C17.9105 10.1257 17.8635 10.0677 17.8165 10.0087C17.7985 9.9867 17.7915 9.9587 17.7705 9.9377L12.6265 4.7377C12.3145 4.4227 11.8085 4.4207 11.4955 4.7317C11.1815 5.0417 11.1785 5.5487 11.4885 5.8627L15.2855 9.7007H2.79949C2.35749 9.7007 2.00049 10.0587 2.00049 10.5007C2.00049 10.9427 2.35749 11.3007 2.79949 11.3007H15.2855L11.4885 15.1377C11.1785 15.4517 11.1815 15.9587 11.4955 16.2687C11.6505 16.4237 11.8545 16.4997 12.0575 16.4997C12.2635 16.4997 12.4695 16.4207 12.6265 16.2627L17.7705 11.0627C17.7905 11.0417 17.7985 11.0147 17.8165 10.9927C17.8635 10.9337 17.9105 10.8757 17.9395 10.8057Z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="item">
+        <img src="https://picsum.photos/id/1015/400/250" alt="Basics by Sita">
+        <div class="content">
+          <h2>Basics by Sita</h2>
+          <p>ลงทุนน้อย แต่ยอดขายพุ่งกระฉูด</p>
+          <div class="btn-arrow">
+            ดูเพิ่มเติม
+            <svg viewBox="0 0 20 21" fill="#06C755" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M17.9395 10.8057C18.0205 10.6107 18.0205 10.3907 17.9395 10.1957C17.9105 10.1257 17.8635 10.0677 17.8165 10.0087C17.7985 9.9867 17.7915 9.9587 17.7705 9.9377L12.6265 4.7377C12.3145 4.4227 11.8085 4.4207 11.4955 4.7317C11.1815 5.0417 11.1785 5.5487 11.4885 5.8627L15.2855 9.7007H2.79949C2.35749 9.7007 2.00049 10.0587 2.00049 10.5007C2.00049 10.9427 2.35749 11.3007 2.79949 11.3007H15.2855L11.4885 15.1377C11.1785 15.4517 11.1815 15.9587 11.4955 16.2687C11.6505 16.4237 11.8545 16.4997 12.0575 16.4997C12.2635 16.4997 12.4695 16.4207 12.6265 16.2627L17.7705 11.0627C17.7905 11.0417 17.7985 11.0147 17.8165 10.9927C17.8635 10.9337 17.9105 10.8757 17.9395 10.8057Z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="item">
+        <img src="https://picsum.photos/id/1019/400/250" alt="Central Chat & Shop">
+        <div class="content">
+          <h2>Central Chat &amp; Shop</h2>
+          <p>ยกระดับรีเทลรูปแบบใหม่ด้วย LINE OA</p>
+          <div class="btn-arrow">
+            ดูเพิ่มเติม
+            <svg viewBox="0 0 20 21" fill="#06C755" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M17.9395 10.8057C18.0205 10.6107 18.0205 10.3907 17.9395 10.1957C17.9105 10.1257 17.8635 10.0677 17.8165 10.0087C17.7985 9.9867 17.7915 9.9587 17.7705 9.9377L12.6265 4.7377C12.3145 4.4227 11.8085 4.4207 11.4955 4.7317C11.1815 5.0417 11.1785 5.5487 11.4885 5.8627L15.2855 9.7007H2.79949C2.35749 9.7007 2.00049 10.0587 2.00049 10.5007C2.00049 10.9427 2.35749 11.3007 2.79949 11.3007H15.2855L11.4885 15.1377C11.1785 15.4517 11.1815 15.9587 11.4955 16.2687C11.6505 16.4237 11.8545 16.4997 12.0575 16.4997C12.2635 16.4997 12.4695 16.4207 12.6265 16.2627L17.7705 11.0627C17.7905 11.0417 17.7985 11.0147 17.8165 10.9927C17.8635 10.9337 17.9105 10.8757 17.9395 10.8057Z"></path>
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div>
-    <div class="x-10" data-length="3" data-loop="undefined" data-center="undefined" ref="x-10--component">
-      <div class="carousel section-content carousel-margin-0">
-        <div class="box-carousel">
-          <div class="inner-box component-carousel-001 owl-carousel owl-theme animate-on-scroll animate-on-scroll-animate-backInUp owl-loaded owl-drag owl-carousel-initialized">
-            <div class="owl-stage-outer">
-              <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all; width: 1065px;">
+  <!-- jQuery + Owl Carousel JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
-                <!-- Card 1 -->
-                <div class="owl-item active first-active" style="width: 330.667px; margin-right: 24px;">
-                  <div class="box-card" style="border: none;">
-                    <a href="th/case-study/npp-box" style="text-decoration:none;">
-                      <img id="desktop-s" src="/files/NPP%20Box%20-%202___4.jpg" loading="lazy">
-                      <img id="mobile-s" src="/files/NPP%20Box%20-%202___4.jpg" loading="lazy">
-                    </a>
-                    <div class="content">
-                      <div style="display:flex; gap:16px; flex-direction: column;">
-                        <h2 class="title-medium">NPP BOX</h2>
-                        <div>ชุบชีวิตธุรกิจครอบครัวให้โตด้วยออนไลน์</div>
-                      </div>
-                      <a href="th/case-study/npp-box" style="text-decoration:none;">
-                        <div class="btn-arrow">
-                          <span class="learn-more label-large">ดูเพิ่มเติม</span>
-                          <svg class="arrow" width="20" height="21" viewBox="0 0 20 21" fill="#06C755" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.9395 10.8057C18.0205 10.6107 18.0205 10.3907 17.9395 10.1957C17.9105 10.1257 17.8635 10.0677 17.8165 10.0087C17.7985 9.9867 17.7915 9.9587 17.7705 9.9377L12.6265 4.7377C12.3145 4.4227 11.8085 4.4207 11.4955 4.7317C11.1815 5.0417 11.1785 5.5487 11.4885 5.8627L15.2855 9.7007H2.79949C2.35749 9.7007 2.00049 10.0587 2.00049 10.5007C2.00049 10.9427 2.35749 11.3007 2.79949 11.3007H15.2855L11.4885 15.1377C11.1785 15.4517 11.1815 15.9587 11.4955 16.2687C11.6505 16.4237 11.8545 16.4997 12.0575 16.4997C12.2635 16.4997 12.4695 16.4207 12.6265 16.2627L17.7705 11.0627C17.7905 11.0417 17.7985 11.0147 17.8165 10.9927C17.8635 10.9337 17.9105 10.8757 17.9395 10.8057Z"></path>
-                          </svg>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="owl-item active" style="width: 330.667px; margin-right: 24px;">
-                  <div class="box-card" style="border: none;">
-                    <a href="th/case-study/success-basicsbysita" style="text-decoration:none;">
-                      <img id="desktop-s" src="/files/666800.jpg" loading="lazy">
-                      <img id="mobile-s" src="/files/666800.jpg" loading="lazy">
-                    </a>
-                    <div class="content">
-                      <div style="display:flex; gap:16px; flex-direction: column;">
-                        <h2 class="title-medium">Basics by Sita</h2>
-                        <div>ลงทุนน้อย แต่ยอดขายพุ่งกระฉูด อะไรคือเคล็ดลับของ Basics by Sita</div>
-                      </div>
-                      <a href="th/case-study/success-basicsbysita" style="text-decoration:none;">
-                        <div class="btn-arrow">
-                          <span class="learn-more label-large">ดูเพิ่มเติม</span>
-                          <svg class="arrow" width="20" height="21" viewBox="0 0 20 21" fill="#06C755" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.9395 10.8057C18.0205 10.6107 18.0205 10.3907 17.9395 10.1957C17.9105 10.1257 17.8635 10.0677 17.8165 10.0087C17.7985 9.9867 17.7915 9.9587 17.7705 9.9377L12.6265 4.7377C12.3145 4.4227 11.8085 4.4207 11.4955 4.7317C11.1815 5.0417 11.1785 5.5487 11.4885 5.8627L15.2855 9.7007H2.79949C2.35749 9.7007 2.00049 10.0587 2.00049 10.5007C2.00049 10.9427 2.35749 11.3007 2.79949 11.3007H15.2855L11.4885 15.1377C11.1785 15.4517 11.1815 15.9587 11.4955 16.2687C11.6505 16.4237 11.8545 16.4997 12.0575 16.4997C12.2635 16.4997 12.4695 16.4207 12.6265 16.2627L17.7705 11.0627C17.7905 11.0417 17.7985 11.0147 17.8165 10.9927C17.8635 10.9337 17.9105 10.8757 17.9395 10.8057Z"></path>
-                          </svg>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="owl-item active" style="width: 330.667px; margin-right: 24px;">
-                  <div class="box-card" style="border: none;">
-                    <a href="th/case-study/success-central" style="text-decoration:none;">
-                      <img id="desktop-s" src="/files/Screen%20Shot%202020-06-16%20at%2013.29.56.png" loading="lazy">
-                      <img id="mobile-s" src="/files/Screen%20Shot%202020-06-16%20at%2013.29.56.png" loading="lazy">
-                    </a>
-                    <div class="content">
-                      <div style="display:flex; gap:16px; flex-direction: column;">
-                        <h2 class="title-medium">Central Chat &amp; Shop</h2>
-                        <div>ยกระดับรีเทลรูปแบบใหม่ด้วย LINE Official Account with API</div>
-                      </div>
-                      <a href="th/case-study/success-central" style="text-decoration:none;">
-                        <div class="btn-arrow">
-                          <span class="learn-more label-large">ดูเพิ่มเติม</span>
-                          <svg class="arrow" width="20" height="21" viewBox="0 0 20 21" fill="#06C755" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.9395 10.8057C18.0205 10.6107 18.0205 10.3907 17.9395 10.1957C17.9105 10.1257 17.8635 10.0677 17.8165 10.0087C17.7985 9.9867 17.7915 9.9587 17.7705 9.9377L12.6265 4.7377C12.3145 4.4227 11.8085 4.4207 11.4955 4.7317C11.1815 5.0417 11.1785 5.5487 11.4885 5.8627L15.2855 9.7007H2.79949C2.35749 9.7007 2.00049 10.0587 2.00049 10.5007C2.00049 10.9427 2.35749 11.3007 2.79949 11.3007H15.2855L11.4885 15.1377C11.1785 15.4517 11.1815 15.9587 11.4955 16.2687C11.6505 16.4237 11.8545 16.4997 12.0575 16.4997C12.2635 16.4997 12.4695 16.4207 12.6265 16.2627L17.7705 11.0627C17.7905 11.0417 17.7985 11.0147 17.8165 10.9927C17.8635 10.9337 17.9105 10.8757 17.9395 10.8057Z"></path>
-                          </svg>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-              </div> <!-- /.owl-stage -->
-            </div> <!-- /.owl-stage-outer -->
-            <div class="owl-nav disabled">
-              <span class="owl-prev"><span aria-label="Previous">‹</span></span>
-              <span class="owl-next"><span aria-label="Next">›</span></span>
-            </div>
-            <div class="owl-dots disabled" style="display: none;">
-              <span class="owl-dot active" data-dot-index="0"><span></span></span>
-            </div>
-          </div> <!-- /.inner-box -->
-        </div> <!-- /.box-carousel -->
-      </div> <!-- /.carousel -->
-    </div> <!-- /.x-10 -->
-  </div>
-</div>
-
+  <script>
+    $(document).ready(function(){
+      $(".owl-carousel").owlCarousel({
+        loop: true,
+        margin: 20,
+        nav: true,
+        dots: true,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        responsive:{
+          0:{ items:1 },
+          600:{ items:2 },
+          1000:{ items:3 }
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
