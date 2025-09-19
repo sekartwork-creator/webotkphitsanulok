@@ -1,199 +1,84 @@
-/* ================== Global Styles ================== */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
+/* ป้องกันไม่ให้ชนกับเว็บหลัก */
 body {
-    color: #111;
-    font-family: 'Sarabun', 'LINE Seed Sans TH', sans-serif;
-    font-size: 16px; /* แทน 1pc */
-    line-height: 1.85;
-    scroll-padding-top: 30px;
-    width: 100%;
-    background-color: #ffffff;
+  font-family: "Kanit", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #fafafa;
 }
 
-/* ================== Header ================== */
 header {
-    width: 100%;
-    padding: 20px 40px;
-    background-color: #fff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
+  background: #06C755;
+  color: white;
+  padding: 15px;
+  text-align: center;
 }
 
-header h1 {
-    font-size: 1.8rem;
-}
-
-/* ================== Container ================== */
 .container {
-    margin: 100px auto 40px; /* เว้น header fixed */
-    max-width: 1200px;
-    display: flex;
-    flex-direction: column;
-    gap: 60px;
-    padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
 }
 
-/* ================== Section LINE OA ================== */
-#line-oa-section {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 48px; /* แทน 3pc */
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+.text-column {
+  width: 50%;
+  padding-right: 20px;
 }
 
-#line-oa-section .text-column {
-    flex: 1;
+.image-column img {
+  max-width: 100%;
+  border-radius: 12px;
 }
 
-#line-oa-section .text-column h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
-#line-oa-section .text-column p {
-    font-size: 1rem;
-    margin-bottom: 30px;
-}
-
-#line-oa-section .text-column .btn {
-    display: inline-block;
-    padding: 12px 24px;
-    margin-right: 12px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
+.btn {
+  padding: 10px 16px;
+  border-radius: 6px;
+  margin-right: 8px;
+  text-decoration: none;
 }
 
 .btn-primary {
-    background-color: #00c300;
-    color: #fff;
-    border: none;
-}
-
-.btn-primary:hover {
-    background-color: #009900;
+  background: #06C755;
+  color: white;
 }
 
 .btn-outlined {
-    border: 2px solid #00c300;
-    color: #00c300;
-    background-color: transparent;
+  border: 1px solid #06C755;
+  color: #06C755;
+  background: white;
 }
 
-.btn-outlined:hover {
-    background-color: #00c300;
-    color: #fff;
+.discover {
+  background: #f4f4f4;
+  padding: 40px 20px;
 }
 
-/* ================== Image Column ================== */
-#line-oa-section .image-column {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#line-oa-section .image-column img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-
-/* ================== Responsive ================== */
-@media (max-width: 992px) {
-    #line-oa-section {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    #line-oa-section .text-column {
-        margin-bottom: 30px;
-    }
-}
-
-@media (max-width: 576px) {
-    body {
-        font-size: 14px;
-    }
-
-    header h1 {
-        font-size: 1.4rem;
-    }
-
-    #line-oa-section .text-column h2 {
-        font-size: 1.6rem;
-    }
-
-    #line-oa-section .text-column p {
-        font-size: 0.95rem;
-    }
-}
-
-
-
-
-/* เฉพาะสำหรับ GitHub Carousel ไม่ซ้ำกับเว็บหลัก */
-.my-carousel-container {
-  padding: 20px;
-  background-color: #f7f7f7;
-}
-
-.my-card {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  padding: 15px;
-  text-align: center;
+.box-carousel {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  gap: 20px;
+  overflow-x: auto;
 }
 
-.my-card img {
+.box-card {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  width: 300px;
+  flex: 0 0 auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.box-card img {
   width: 100%;
-  height: auto;
   border-radius: 8px;
 }
 
-.my-card h2 {
-  font-size: 1.2rem;
-  color: #333;
+.content {
+  margin-top: 10px;
 }
 
-.my-card p {
-  font-size: 0.9rem;
-  color: #555;
-}
-
-.my-btn {
+.btn-arrow {
   display: inline-block;
-  padding: 8px 16px;
-  background-color: #06C755;
-  color: white;
-  text-decoration: none;
-  border-radius: 6px;
-  transition: 0.3s;
+  margin-top: 10px;
+  color: #06C755;
+  font-weight: bold;
 }
-
-.my-btn:hover {
-  background-color: #05a647;
-}
-
-
