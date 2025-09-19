@@ -35,6 +35,26 @@ nav ul li a {
   margin: 0 auto;
   padding: 20px;
 }
+body {
+    color: #111;
+    font-family: 'Sarabun', 'LINE Seed Sans TH', sans-serif;
+    font-size: 16px; /* แทน 1pc */
+    line-height: 1.85;
+    margin: 0;
+    width: 100%;
+}
+
+.container {
+    scroll-padding-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 48px; /* แทน 3pc (~16px * 3) */
+    margin: 0 auto;
+    height: 100%;
+    max-width: 1200px; /* กำหนดให้ไม่กว้างเกินไป */
+}
 
 /* ================= Section LINE OA ================= */
 #line-oa-section {
@@ -102,3 +122,4 @@ nav ul li a {
     gap: 10px;
   }
 }
+
