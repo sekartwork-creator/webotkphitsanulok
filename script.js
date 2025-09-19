@@ -29,3 +29,8 @@ $(document).ready(function(){
     }
   });
 });
+
+// ตัวอย่าง script.js
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("เว็บโหลดเสร็จแล้ว");
+});
