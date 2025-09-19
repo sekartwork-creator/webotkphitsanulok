@@ -146,3 +146,54 @@ header h1 {
     }
 }
 
+
+
+
+/* เฉพาะสำหรับ GitHub Carousel ไม่ซ้ำกับเว็บหลัก */
+.my-carousel-container {
+  padding: 20px;
+  background-color: #f7f7f7;
+}
+
+.my-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 15px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.my-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.my-card h2 {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.my-card p {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.my-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #06C755;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.my-btn:hover {
+  background-color: #05a647;
+}
+
+
