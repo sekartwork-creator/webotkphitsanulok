@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flat UI</title>
   <style>
-  /* ===== Body (จัดกลางทั้งแนวตั้ง/แนวนอน) ===== */
+ /* ===== Body (จัดกลางทั้งแนวตั้ง/แนวนอน) ===== */
     body {
       margin: 0;
       padding: 20px;
@@ -37,21 +37,23 @@
       text-align: left;
     }
 
-    /* ===== Dropdown / Input ===== */
+    /* ===== Dropdown / Textarea ===== */
     select, textarea {
       width: 100%;
       max-width: 400px;
       padding: 15px;
       margin-bottom: 15px;
-      border: none;                  /* ไม่มีกรอบ */
-      border-bottom: 2px solid #ccc; /* เส้นใต้ */
+      border: 1.5px solid #ccc;     /* เส้นขอบ */
+      border-radius: 10px;          /* ขอบโค้งมน */
       font-size: 1rem;
-      background: transparent;       /* โปร่งใส */
+      background: #f9f9f9;          /* พื้นหลังจางๆ */
       outline: none;
+      box-sizing: border-box;
     }
 
     select:focus, textarea:focus {
-      border-bottom: 2px solid #06C755;
+      border: 1.5px solid #06C755;  /* เน้นสีเขียวตอนเลือก */
+      background: #fff;
     }
 
     /* Placeholder ให้เป็นสีเทาบางๆ */
@@ -71,7 +73,7 @@
       max-width: 400px;
       padding: 15px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       background-color: #06C755;
       color: #fff;
       font-size: 1.2rem;
@@ -190,4 +192,5 @@
   
 </body>
 </html>
+
 
