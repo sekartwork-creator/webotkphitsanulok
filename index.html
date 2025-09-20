@@ -3,106 +3,181 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>เว็บตัวอย่าง</title>
-  <!-- ลิงก์ CSS -->
-  <link rel="stylesheet" href="style.css">
+  <title>Flat UI</title>
+  <style>
+    /* ===== Body (พื้นหลัง) ===== */
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Kanit', sans-serif;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    /* ===== Header ===== */
+    h2 {
+      color: #06C755;
+      font-weight: 700;
+      margin-bottom: 30px;
+    }
+
+    /* ===== LINE Login ===== */
+    .login-line {
+      font-weight: 700;
+      color: #000;
+      text-align: left;
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 10px;
+    }
+
+    /* ===== Dropdown / Input ===== */
+    select, textarea {
+      width: 100%;
+      max-width: 400px;
+      padding: 15px;
+      margin-bottom: 15px;
+      border: none;                  /* ไม่มีกรอบ */
+      border-bottom: 2px solid #ccc; /* ใช้เส้นใต้แทน */
+      font-size: 1rem;
+      background: transparent;       /* โปร่งใส */
+      outline: none;
+    }
+
+    select:focus, textarea:focus {
+      border-bottom: 2px solid #06C755;
+    }
+
+    textarea {
+      resize: none;
+      height: 80px;
+    }
+
+    /* ===== Button ===== */
+    .btn {
+      width: 100%;
+      max-width: 400px;
+      padding: 15px;
+      border: none;
+      border-radius: 8px;
+      background-color: #06C755;
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #049645;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      margin-top: auto;
+      font-size: 0.85rem;
+      color: #666;
+      text-align: center;
+    }
+
+    footer a {
+      color: #06C755;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ===== HEADER ===== -->
-  <header>
-    <h1>เว็บตัวอย่าง</h1>
-  </header>
+  <h2>ระบบเช็คชื่อเข้างาน</h2>
+  <div class="login-line">Log in with LINE Business ID</div>
 
-  <div class="container">
+  <select>
+    <option disabled selected>เลือกพนักงาน</option>
+    <option>นาง กัณฑ์กนกนรี ปิติภัทรพิรุฬห์</option>
+    <option>นางสาว พิชญทัฬห์ สุขคำภา</option>
+    <option>นาย สุรเดช เอี่ยมบู่</option>
+  </select>
 
-    <!-- ===== LINE OA Section ===== -->
-    <section id="line-oa-section">
-      <div class="text-column">
-        <h2>LINE Official Account</h2>
-        <p>
-          คือบัญชีทางการสำหรับธุรกิจที่ช่วยให้ร้านค้าสามารถสร้างฐานผู้ติดตามไม่จำกัด 
-          เพื่อส่งข้อมูลทางการตลาด โปรโมชั่นพิเศษ รวมถึงสื่อสารแบบรายบุคคลกับลูกค้า
-        </p>
-        <div>
-          <a href="https://lineforbusiness.com/th/service/line-oa-features/broadcast-message" 
-             target="_blank" class="btn btn-outlined">ดูราคาแพ็กเกจ</a>
-          <a href="https://entry.line.biz/form/entry/unverified" 
-             target="_blank" class="btn btn-primary">สมัครบัญชีทางการเลย</a>
-        </div>
-      </div>
+  <textarea placeholder="หมายเหตุ..."></textarea>
 
-      <div class="image-column">
-        <img id="desktop-image" 
-             src="https://firebasestorage.googleapis.com/v0/b/sekkport.appspot.com/o/215215.png?alt=media&token=2116a5a3-060d-4fae-a935-e6aeb12b27b7" 
-             alt="LINE OA Desktop">
-      </div>
-    </section>
-  </div>
+  <button class="btn">ลงชื่อเข้างาน</button>
 
-  <!-- ===== Discover Section ===== -->
-  <div class="discover padding gray" id="object-cover">
-    <div class="section-content">
-      <div class="t-01">
-        <div>
-          <p class="heading-large">
-            เรียนรู้ความสำเร็จในจากการใช้บัญชีทางการจากแบรนด์ดัง
-          </p>
-          <p class="body-large">
-            บัญชีทางการช่วยให้ธุรกิจของคุณเข้าถึงกลุ่มลูกค้าที่ต้องการ
-            และช่วยทำให้คุณเข้าถึงเป้าหมายทางธุรกิจได้ตามต้องการ
-            เราคัดเรื่องราวความสำเร็จของแบรนด์เหล่านี้เพื่อเป็นแรงบันดาล
-            ในการนำมาใช้ต่อยอดธุรกิจของคุณ
-          </p>
-        </div>
-      </div>
-    </div>
+  <footer>
+    <a href="#">About Business ID</a> | 
+    <a href="#">Help</a> | 
+    <a href="#">Terms of Use</a>
+  </footer>
 
-    <!-- ===== Carousel Section ===== -->
-    <div class="carousel section-content carousel-margin-0">
-      <div class="box-carousel">
+ <audio id="successSound" src="https://firebasestorage.googleapis.com/v0/b/sekkport.appspot.com/o/new-notification-015-363677.mp3?alt=media&token=74f2ee1e-021a-4306-9d18-fcbe5d06291b"></audio>
+<audio id="errorSound" src="https://www.soundjay.com/buttons/sounds/button-10.mp3"></audio>
 
-        <!-- Card 1 -->
-        <div class="box-card">
-          <a href="th/case-study/npp-box">
-            <img src="/files/NPP%20Box%20-%202___4.jpg" alt="NPP Box">
-          </a>
-          <div class="content">
-            <h2 class="title-medium">NPP BOX</h2>
-            <div>ชุบชีวิตธุรกิจครอบครัวให้โตด้วยออนไลน์</div>
-            <a href="th/case-study/npp-box" class="btn-arrow">ดูเพิ่มเติม</a>
-          </div>
-        </div>
+<script>
+  const deploymentURL = 'https://script.google.com/macros/s/AKfycbxeI_8mx6kjznc5NuJ1u59dCP2dAFgFwLUUOHr06TjpnlKrfkg2ffMYdV1GvLGxtLEC/exec';
 
-        <!-- Card 2 -->
-        <div class="box-card">
-          <a href="th/case-study/success-basicsbysita">
-            <img src="/files/666800.jpg" alt="Basics by Sita">
-          </a>
-          <div class="content">
-            <h2 class="title-medium">Basics by Sita</h2>
-            <div>ลงทุนน้อย แต่ยอดขายพุ่งกระฉูด</div>
-            <a href="th/case-study/success-basicsbysita" class="btn-arrow">ดูเพิ่มเติม</a>
-          </div>
-        </div>
+  let selectedStaffId = '';
+  let selectedStaffName = '';
 
-        <!-- Card 3 -->
-        <div class="box-card">
-          <a href="th/case-study/success-central">
-            <img src="/files/Screen%20Shot%202020-06-16%20at%2013.29.56.png" alt="Central Chat & Shop">
-          </a>
-          <div class="content">
-            <h2 class="title-medium">Central Chat &amp; Shop</h2>
-            <div>ยกระดับรีเทลรูปแบบใหม่ด้วย LINE OA with API</div>
-            <a href="th/case-study/success-central" class="btn-arrow">ดูเพิ่มเติม</a>
-          </div>
-        </div>
+  function loadEmployees() {
+    fetch(${deploymentURL}?action=getEmployees)
+      .then(res => res.json())
+      .then(data => {
+        const list = document.getElementById('employeeList');
+        list.innerHTML = '';
+        data.forEach(emp => {
+          const div = document.createElement('div');
+          div.textContent = emp.name;
+          div.dataset.id = emp.id;
+          div.dataset.name = emp.name;
+          div.onclick = () => {
+            selectedStaffId = emp.id;
+            selectedStaffName = emp.name;
+            document.getElementById('dropdownBtn').textContent = emp.name;
+            list.style.display = 'none';
+          };
+          list.appendChild(div);
+        });
+      });
+  }
 
-      </div>
-    </div>
-  </div>
+  document.getElementById('dropdownBtn').onclick = () => {
+    const list = document.getElementById('employeeList');
+    list.style.display = list.style.display === 'block' ? 'none' : 'block';
+  }
 
-  <!-- ลิงก์ JS -->
-  <script src="script.js"></script>
+  function checkInEmployee() {
+    const note = document.getElementById('note').value;
+    const resultDiv = document.getElementById('result');
+
+    if (!selectedStaffId) {
+      resultDiv.textContent = "กรุณาเลือกชื่อก่อน!";
+      resultDiv.className = "error";
+      document.getElementById('errorSound').play();
+      return;
+    }
+
+    fetch(${deploymentURL}?action=checkIn&name=${encodeURIComponent(selectedStaffName)}&staffId=${encodeURIComponent(selectedStaffId)}&note=${encodeURIComponent(note)})
+      .then(res => res.json())
+      .then(response => {
+        resultDiv.textContent = response.msg;
+        resultDiv.className = response.status === "success" ? "success" : "error";
+        if(response.status === "success"){
+          document.getElementById('successSound').play();
+        } else {
+          document.getElementById('errorSound').play();
+        }
+      });
+  }
+
+  loadEmployees();
+</script>
+  
 </body>
 </html>
