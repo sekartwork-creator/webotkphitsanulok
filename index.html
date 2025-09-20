@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flat UI</title>
   <style>
-    /* ===== Body (พื้นหลัง) ===== */
+  /* ===== Body (จัดกลางทั้งแนวตั้ง/แนวนอน) ===== */
     body {
       margin: 0;
       padding: 20px;
@@ -13,6 +13,7 @@
       background-color: #fff;
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
       min-height: 100vh;
       box-sizing: border-box;
@@ -22,17 +23,18 @@
     h2 {
       color: #06C755;
       font-weight: 700;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
+      text-align: center;
     }
 
     /* ===== LINE Login ===== */
     .login-line {
       font-weight: 700;
       color: #000;
-      text-align: left;
       width: 100%;
       max-width: 400px;
       margin-bottom: 10px;
+      text-align: left;
     }
 
     /* ===== Dropdown / Input ===== */
@@ -42,7 +44,7 @@
       padding: 15px;
       margin-bottom: 15px;
       border: none;                  /* ไม่มีกรอบ */
-      border-bottom: 2px solid #ccc; /* ใช้เส้นใต้แทน */
+      border-bottom: 2px solid #ccc; /* เส้นใต้ */
       font-size: 1rem;
       background: transparent;       /* โปร่งใส */
       outline: none;
@@ -50,6 +52,12 @@
 
     select:focus, textarea:focus {
       border-bottom: 2px solid #06C755;
+    }
+
+    /* Placeholder ให้เป็นสีเทาบางๆ */
+    textarea::placeholder {
+      color: #aaa;
+      font-style: italic;
     }
 
     textarea {
@@ -69,6 +77,7 @@
       font-size: 1.2rem;
       font-weight: 700;
       cursor: pointer;
+      margin-top: 10px;
     }
 
     .btn:hover {
@@ -77,7 +86,7 @@
 
     /* ===== Footer ===== */
     footer {
-      margin-top: auto;
+      margin-top: 30px;
       font-size: 0.85rem;
       color: #666;
       text-align: center;
@@ -181,3 +190,4 @@
   
 </body>
 </html>
+
