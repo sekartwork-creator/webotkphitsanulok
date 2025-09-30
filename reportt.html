@@ -7,47 +7,15 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
 /* ===== Header ===== */
-.site-header {
-  background: #06C755;
-  color: #fff;
-  padding: 15px 20px;
-}
-.site-header .header-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-.site-header h1 {
-  margin: 0;
-  font-size: 22px;
-}
-.site-header nav a {
-  color: #fff;
-  text-decoration: none;
-  margin-left: 15px;
-  padding: 6px 12px;
-  border-radius: 6px;
-  transition: background 0.3s;
-}
-.site-header nav a:hover {
-  background: #05a64a;
-}
+.site-header { background: #06C755; color: #fff; padding: 15px 20px; }
+.site-header .header-container { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.site-header h1 { margin: 0; font-size: 22px; }
+.site-header nav a { color: #fff; text-decoration: none; margin-left: 15px; padding: 6px 12px; border-radius: 6px; transition: background 0.3s; }
+.site-header nav a:hover { background: #05a64a; }
 
 /* ===== Card Style ===== */
-.articles { 
-  display: grid; 
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); 
-  gap: 15px; 
-  margin-top:20px;
-}
-.article-wrapper { 
-  border-radius: 10px; 
-  overflow: hidden; 
-  box-shadow: 0 3px 8px rgba(0,0,0,0.12); 
-  background: #fff; 
-  transition: transform 0.2s; 
-}
+.articles { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 15px; margin-top:20px; }
+.article-wrapper { border-radius: 10px; overflow: hidden; box-shadow: 0 3px 8px rgba(0,0,0,0.12); background: #fff; transition: transform 0.2s; }
 .article-wrapper:hover { transform: translateY(-4px); }
 .article-wrapper figure { margin:0; height:140px; overflow:hidden; }
 .article-wrapper img { width:100%; height:100%; object-fit:cover; }
@@ -65,9 +33,9 @@
   <div class="header-container">
     <h1>LINE Official Account</h1>
     <nav>
-      <a href="https://script.google.com/macros/s/AKfycbx2zwQQqezbxW7mt8Y16aG1ww8f6fWrK2AsMAGWdyeykTXxpMReGUSSK13-ZS4YxhcsKQ/exec">Home</a>
-      <a href="#attendanceModal">Attendance</a>
-      <a href="#contact">Contact</a>
+      <a href="#">Home</a>
+      <a href="#">Attendance</a>
+      <a href="#">Contact</a>
       <a href="#" id="addTenantBtn" style="background:#fff;color:#06C755;">➕ เพิ่มผู้เช่า</a>
     </nav>
   </div>
@@ -85,7 +53,8 @@
 </div>
 
 <script>
-/* ===== ส่วน tenant script เดิม ===== */
+const scriptUrl = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"; // ใส่ URL Web App ของคุณ
+
 function formatDateThai(dateStr) {
   if(!dateStr) return "";
   const months=["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน",
@@ -95,12 +64,14 @@ function formatDateThai(dateStr) {
   return `${day} ${month} ${year}`;
 }
 
-function loadTenants() {
-  google.script.run.withSuccessHandler(function(data){
-    const tenants=JSON.parse(data);
-    const container=document.getElementById("tenantCards");
-    const keyword=document.getElementById("searchBox").value.toLowerCase();
-    container.innerHTML="";
+// โหลดผู้เช่า
+async function loadTenants() {
+  try {
+    const res = await fetch(scriptUrl);
+    const tenants = await res.json();
+    const container = document.getElementById("tenantCards");
+    const keyword = document.getElementById("searchBox").value.toLowerCase();
+    container.innerHTML = "";
 
     tenants.forEach((t,i)=>{
       if(!keyword || t.name.toLowerCase().includes(keyword) ||
@@ -143,18 +114,33 @@ function loadTenants() {
         btn.classList.toggle("rotate", !isOpen);
       });
     });
-  }).getAllTenants();
+  } catch(err) {
+    console.error(err);
+  }
 }
 
 document.getElementById("searchBox").addEventListener("keyup", loadTenants);
+window.onload = loadTenants;
 
-function editTenant(index){
-  google.script.run.withSuccessHandler(function(data){
-    const tenants=JSON.parse(data);
-    const t=tenants.find(x=>x.index===index);
-    Swal.fire({
-      title:'แก้ไขผู้เช่า',
-      html:`
+// เพิ่มผู้เช่า
+function addTenantAPI(tenant) {
+  fetch(scriptUrl, {
+    method: "POST",
+    body: JSON.stringify({ action: "add", tenant }),
+    headers: { "Content-Type": "application/json" }
+  }).then(()=>loadTenants())
+    .catch(err => console.error(err));
+}
+
+// แก้ไขผู้เช่า
+function editTenant(index) {
+  fetch(scriptUrl)
+    .then(res=>res.json())
+    .then(tenants=>{
+      const t = tenants.find(x=>x.index===index);
+      Swal.fire({
+        title:'แก้ไขผู้เช่า',
+        html: `
 <input id="swal-name" class="swal2-input" value="${t.name}">
 <input id="swal-address" class="swal2-input" value="${t.address}">
 <input id="swal-contract" class="swal2-input" value="${t.contractNo}">
@@ -167,68 +153,58 @@ function editTenant(index){
 <input id="swal-rentType" class="swal2-input" value="${t.rentType}">
 <input id="swal-note" class="swal2-input" value="${t.note}">
 <input id="swal-image" class="swal2-input" value="${t.image}">
-      `,
-      showCancelButton:true,
-      confirmButtonText:'บันทึก',
-      cancelButtonText:'ยกเลิก'
-    }).then(result=>{
-      if(result.isConfirmed){
-        const updated={
-          name:document.getElementById('swal-name').value,
-          address:document.getElementById('swal-address').value,
-          contractNo:document.getElementById('swal-contract').value,
-          phone:document.getElementById('swal-phone').value,
-          email:document.getElementById('swal-email').value,
-          startDate:document.getElementById('swal-startDate').value,
-          duration:document.getElementById('swal-duration').value,
-          rentRate:document.getElementById('swal-rentRate').value,
-          annualIncome:document.getElementById('swal-annualIncome').value,
-          rentType:document.getElementById('swal-rentType').value,
-          note:document.getElementById('swal-note').value,
-          image:document.getElementById('swal-image').value
-        };
-        google.script.run.withSuccessHandler(()=>{
-          Swal.fire("สำเร็จ","อัปเดตข้อมูลแล้ว","success");
-          loadTenants();
-        }).updateTenant(index, updated);
-      }
+        `,
+        showCancelButton:true,
+        confirmButtonText:'บันทึก',
+        cancelButtonText:'ยกเลิก'
+      }).then(result=>{
+        if(result.isConfirmed){
+          const updated = {
+            name:document.getElementById('swal-name').value,
+            address:document.getElementById('swal-address').value,
+            contractNo:document.getElementById('swal-contract').value,
+            phone:document.getElementById('swal-phone').value,
+            email:document.getElementById('swal-email').value,
+            startDate:document.getElementById('swal-startDate').value,
+            duration:document.getElementById('swal-duration').value,
+            rentRate:document.getElementById('swal-rentRate').value,
+            annualIncome:document.getElementById('swal-annualIncome').value,
+            rentType:document.getElementById('swal-rentType').value,
+            note:document.getElementById('swal-note').value,
+            image:document.getElementById('swal-image').value,
+            index
+          };
+          fetch(scriptUrl, {
+            method:"POST",
+            body: JSON.stringify({ action:"update", tenant: updated }),
+            headers: { "Content-Type": "application/json" }
+          }).then(()=>loadTenants());
+        }
+      });
     });
-  }).getAllTenants();
 }
 
-
-const url = "https://script.google.com/macros/s/AKfycbzCgAJcP8jsNak27rNqpPWVCBjUkRmY_4EkVkAk_VCkWIhr9O6uRNVaKLv6CQ93VZuZJg/exec"; // URL App Script 1
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("output").innerText = JSON.stringify(data);
-      })
-      .catch(err => console.error(err));
-
-  
-function deleteTenant(index){
+// ลบผู้เช่า
+function deleteTenant(index) {
   Swal.fire({
     title:"คุณแน่ใจหรือไม่?",
     text:"เมื่อลบแล้วจะไม่สามารถกู้คืนได้!",
     icon:"warning",
     showCancelButton:true,
-    confirmButtonColor:"#d33",
-    cancelButtonColor:"#3085d6",
     confirmButtonText:"ลบ",
     cancelButtonText:"ยกเลิก"
   }).then(result=>{
     if(result.isConfirmed){
-      google.script.run.withSuccessHandler(()=>{
-        Swal.fire("ลบแล้ว!","ข้อมูลผู้เช่าถูกลบเรียบร้อย","success");
-        loadTenants();
-      }).deleteTenant(index);
+      fetch(scriptUrl, {
+        method:"POST",
+        body: JSON.stringify({ action:"delete", index }),
+        headers: { "Content-Type": "application/json" }
+      }).then(()=>loadTenants());
     }
   });
 }
 
-window.onload=loadTenants;
-
-/* ===== ปุ่มเพิ่มผู้เช่า Header ===== */
+// ปุ่มเพิ่มผู้เช่า
 document.getElementById("addTenantBtn").addEventListener("click", ()=>{
   Swal.fire({
     title: 'เพิ่มผู้เช่า',
@@ -249,28 +225,23 @@ document.getElementById("addTenantBtn").addEventListener("click", ()=>{
     showCancelButton: true,
     confirmButtonText: 'บันทึก',
     cancelButtonText: 'ยกเลิก',
-    preConfirm: () => {
-      return {
-        name: document.getElementById('swal-name').value,
-        address: document.getElementById('swal-address').value,
-        contractNo: document.getElementById('swal-contract').value,
-        phone: document.getElementById('swal-phone').value,
-        email: document.getElementById('swal-email').value,
-        startDate: document.getElementById('swal-startDate').value,
-        duration: document.getElementById('swal-duration').value,
-        rentRate: document.getElementById('swal-rentRate').value,
-        annualIncome: document.getElementById('swal-annualIncome').value,
-        rentType: document.getElementById('swal-rentType').value,
-        note: document.getElementById('swal-note').value,
-        image: document.getElementById('swal-image').value
-      };
-    }
-  }).then((result) => {
+    preConfirm: () => ({
+      name: document.getElementById('swal-name').value,
+      address: document.getElementById('swal-address').value,
+      contractNo: document.getElementById('swal-contract').value,
+      phone: document.getElementById('swal-phone').value,
+      email: document.getElementById('swal-email').value,
+      startDate: document.getElementById('swal-startDate').value,
+      duration: document.getElementById('swal-duration').value,
+      rentRate: document.getElementById('swal-rentRate').value,
+      annualIncome: document.getElementById('swal-annualIncome').value,
+      rentType: document.getElementById('swal-rentType').value,
+      note: document.getElementById('swal-note').value,
+      image: document.getElementById('swal-image').value
+    })
+  }).then(result=>{
     if(result.isConfirmed){
-      google.script.run.withSuccessHandler(()=>{
-        Swal.fire({icon:'success', title:'บันทึกสำเร็จ', text:'ผู้เช่าได้ถูกเพิ่มแล้ว', timer:2000, showConfirmButton:false});
-        loadTenants();
-      }).addTenant(result.value);
+      addTenantAPI(result.value);
     }
   });
 });
