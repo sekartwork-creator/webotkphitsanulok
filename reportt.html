@@ -4,218 +4,169 @@
 <meta charset="UTF-8">
 <title>รายงานผู้เช่า</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
-body { font-family: 'Sarabun', sans-serif; background:#f5f5f5; padding:20px; }
-.site-header { background:#06C755; color:#fff; padding:15px 20px; }
-.site-header h1 { margin:0; font-size:22px; }
-.site-header nav a { color:#fff; text-decoration:none; margin-left:15px; padding:6px 12px; border-radius:6px; transition:0.3s; }
-.site-header nav a:hover { background:#05a64a; }
-.articles { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:15px; margin-top:20px; }
-.article-wrapper { border-radius:10px; overflow:hidden; box-shadow:0 3px 8px rgba(0,0,0,0.12); background:#fff; transition:0.2s; }
-.article-wrapper:hover { transform:translateY(-4px); }
-.article-wrapper figure { margin:0; height:140px; overflow:hidden; }
-.article-wrapper img { width:100%; height:100%; object-fit:cover; }
-.article-body { padding:10px; }
-.article-body h2 { font-size:1rem; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;}
-.toggle-content { display:none; margin-top:8px; font-size:0.9rem; }
-.toggle-btn { border:none; background:none; font-size:18px; cursor:pointer; transition: transform 0.3s ease; }
-.toggle-btn.rotate { transform:rotate(180deg); }
+body {
+  font-family: 'Sarabun', sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== Header ===== */
+.site-header {
+  background-color: #06C755;
+  color: #fff;
+  padding: 15px 20px;
+  text-align: center;
+}
+.site-header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+/* ===== Container ===== */
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+}
+.search-refresh {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+/* ===== Tenant Cards ===== */
+.articles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 15px;
+}
+.article-wrapper {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+.article-wrapper:hover {
+  transform: translateY(-5px);
+}
+.article-wrapper figure {
+  margin: 0;
+  height: 160px;
+  overflow: hidden;
+}
+.article-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.article-body {
+  padding: 12px;
+}
+.article-body h2 {
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.article-body h2 span.toggle-btn {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+.article-body h2 span.rotate {
+  transform: rotate(180deg);
+}
+.article-body .toggle-content {
+  display: none;
+  font-size: 0.9rem;
+  color: #333;
+  margin-top: 8px;
+  line-height: 1.4;
+}
 </style>
 </head>
 <body>
 
 <header class="site-header">
-  <div class="d-flex justify-content-between align-items-center">
-    <h1>LINE Official Account</h1>
-    <nav>
-      <a href="#" id="addTenantBtn" style="background:#fff;color:#06C755;">➕ เพิ่มผู้เช่า</a>
-    </nav>
-  </div>
+  <h1>รายงานผู้เช่า</h1>
 </header>
 
-<div class="container mt-4">
-  <div class="d-flex justify-content-between mb-3">
+<div class="container">
+  <div class="search-refresh">
     <input type="text" id="searchBox" class="form-control w-50" placeholder="ค้นหาผู้เช่า...">
-    <button class="btn btn-secondary" onclick="loadTenants()">รีเฟรช</button>
+    <button class="btn btn-success" onclick="loadTenants()">รีเฟรช</button>
   </div>
+
   <section class="articles" id="tenantCards"></section>
 </div>
 
 <script>
-// แปลงวันที่ไทย
-function formatDateThai(dateStr){
-  if(!dateStr) return "";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzCgAJcP8jsNak27rNqpPWVCBjUkRmY_4EkVkAk_VCkWIhr9O6uRNVaKLv6CQ93VZuZJg/exec";
+
+function formatDateThai(dateStr) {
+  if(!dateStr) return "-";
   const months=["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน",
                 "กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"];
   const d=new Date(dateStr);
+  if(isNaN(d)) return dateStr;
   return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()+543}`;
 }
 
-// โหลดผู้เช่า
 function loadTenants() {
-  google.script.run.withSuccessHandler(function(tenants){
-    const container = document.getElementById("tenantCards");
-    const keyword = document.getElementById("searchBox").value.toLowerCase();
-    container.innerHTML = "";
+  const keyword = document.getElementById("searchBox").value.toLowerCase();
+  fetch(WEB_APP_URL)
+    .then(res => res.json())
+    .then(data => {
+      const container = document.getElementById("tenantCards");
+      container.innerHTML = "";
 
-    tenants.forEach((t,i)=>{
-      if(!keyword || t.name.toLowerCase().includes(keyword) ||
-         t.contractNo.toLowerCase().includes(keyword) ||
-         t.phone.toLowerCase().includes(keyword)) {
-
-        container.innerHTML += `
+      data.forEach((t, i) => {
+        if(!keyword || t.name.toLowerCase().includes(keyword) || t.contractNo.toLowerCase().includes(keyword) || t.phone.toLowerCase().includes(keyword)) {
+          container.innerHTML += `
 <article>
   <div class="article-wrapper">
-    <figure><img src="${t.image||'https://picsum.photos/seed/'+i+'/800/450'}" alt="${t.name}"></figure>
+    <figure><img src="${t.image || 'https://picsum.photos/seed/'+i+'/800/450'}" alt="${t.name}"></figure>
     <div class="article-body">
-      <h2>${t.name} <button class="toggle-btn">▼</button></h2>
+      <h2>${t.name} <span class="toggle-btn">▼</span></h2>
       <div class="toggle-content">
         <p>
-          <b>เลขที่สัญญา:</b> ${t.contractNo||"-"}<br>
-          <b>ที่อยู่:</b> ${t.address||"-"}<br>
-          <b>โทร:</b> ${t.phone||"-"}<br>
-          <b>อีเมล:</b> ${t.email||"-"}<br>
+          <b>เลขที่สัญญา:</b> ${t.contractNo || "-"}<br>
+          <b>ที่อยู่:</b> ${t.address || "-"}<br>
+          <b>โทร:</b> ${t.phone || "-"}<br>
+          <b>อีเมล:</b> ${t.email || "-"}<br>
           <b>ลงวันที่:</b> ${formatDateThai(t.startDate)}<br>
-          <b>ระยะเวลา:</b> ${t.duration||"-"} เดือน<br>
-          <b>ค่าเช่า:</b> ${t.rentRate||"-"} บาท<br>
-          <b>รายได้ต่อปี:</b> ${t.annualIncome||"-"} บาท<br>
-          <b>ประเภท:</b> ${t.rentType||"-"}<br>
-          <b>หมายเหตุ:</b> ${t.note||"-"}
+          <b>ระยะเวลา:</b> ${t.duration || "-"} เดือน<br>
+          <b>ค่าเช่า:</b> ${t.rentRate || "-"} บาท<br>
+          <b>รายได้ต่อปี:</b> ${t.annualIncome || "-"} บาท<br>
+          <b>ประเภท:</b> ${t.rentType || "-"}<br>
+          <b>หมายเหตุ:</b> ${t.note || "-"}
         </p>
-        <a href="#" onclick="editTenant(${t.index})">✏️ แก้ไข</a> | 
-        <a href="#" onclick="deleteTenant(${t.index})">🗑️ ลบ</a>
       </div>
     </div>
   </div>
 </article>`;
-      }
-    });
-
-    document.querySelectorAll(".toggle-btn").forEach(btn=>{
-      btn.addEventListener("click", ()=>{
-        const content = btn.closest(".article-body").querySelector(".toggle-content");
-        const isOpen = content.style.display === "block";
-        content.style.display = isOpen ? "none" : "block";
-        btn.classList.toggle("rotate", !isOpen);
+        }
       });
-    });
 
-  }).getAllTenants();
+      // Toggle content
+      document.querySelectorAll(".article-body h2").forEach(header => {
+        header.onclick = () => {
+          const content = header.nextElementSibling;
+          const btn = header.querySelector(".toggle-btn");
+          const isOpen = content.style.display === "block";
+          content.style.display = isOpen ? "none" : "block";
+          btn.classList.toggle("rotate", !isOpen);
+        };
+      });
+    })
+    .catch(err => console.error("โหลดข้อมูลผู้เช่าไม่สำเร็จ:", err));
 }
 
 document.getElementById("searchBox").addEventListener("keyup", loadTenants);
 window.onload = loadTenants;
-
-// เพิ่มผู้เช่า
-document.getElementById("addTenantBtn").addEventListener("click", ()=>{
-  Swal.fire({
-    title:'เพิ่มผู้เช่า',
-    html:`
-<input id="swal-name" class="swal2-input" placeholder="ชื่อ-นามสกุล">
-<input id="swal-address" class="swal2-input" placeholder="ที่อยู่">
-<input id="swal-contract" class="swal2-input" placeholder="เลขที่สัญญา">
-<input id="swal-phone" class="swal2-input" placeholder="เบอร์โทร">
-<input id="swal-email" class="swal2-input" placeholder="อีเมล">
-<input type="date" id="swal-startDate" class="swal2-input">
-<input id="swal-duration" class="swal2-input" placeholder="ระยะเวลา (เดือน)">
-<input id="swal-rentRate" class="swal2-input" placeholder="ค่าเช่า (บาท)">
-<input id="swal-annualIncome" class="swal2-input" placeholder="รายได้ต่อปี">
-<input id="swal-rentType" class="swal2-input" placeholder="ประเภทการเช่า">
-<input id="swal-note" class="swal2-input" placeholder="หมายเหตุ">
-<input id="swal-image" class="swal2-input" placeholder="ลิงก์รูปภาพ">
-    `,
-    showCancelButton:true,
-    confirmButtonText:'บันทึก'
-  }).then(result=>{
-    if(result.isConfirmed){
-      const tenant = {
-        name:document.getElementById('swal-name').value,
-        address:document.getElementById('swal-address').value,
-        contractNo:document.getElementById('swal-contract').value,
-        phone:document.getElementById('swal-phone').value,
-        email:document.getElementById('swal-email').value,
-        startDate:document.getElementById('swal-startDate').value,
-        duration:document.getElementById('swal-duration').value,
-        rentRate:document.getElementById('swal-rentRate').value,
-        annualIncome:document.getElementById('swal-annualIncome').value,
-        rentType:document.getElementById('swal-rentType').value,
-        note:document.getElementById('swal-note').value,
-        image:document.getElementById('swal-image').value
-      };
-      google.script.run.withSuccessHandler(()=>{
-        Swal.fire({icon:'success', title:'บันทึกสำเร็จ', timer:1500, showConfirmButton:false});
-        loadTenants();
-      }).addTenant(tenant);
-    }
-  });
-});
-
-// แก้ไขผู้เช่า
-function editTenant(index){
-  google.script.run.withSuccessHandler(function(tenants){
-    const t = tenants[index];
-    Swal.fire({
-      title:'แก้ไขผู้เช่า',
-      html:`
-<input id="swal-name" class="swal2-input" value="${t.name}">
-<input id="swal-address" class="swal2-input" value="${t.address}">
-<input id="swal-contract" class="swal2-input" value="${t.contractNo}">
-<input id="swal-phone" class="swal2-input" value="${t.phone}">
-<input id="swal-email" class="swal2-input" value="${t.email}">
-<input type="date" id="swal-startDate" class="swal2-input" value="${t.startDate}">
-<input id="swal-duration" class="swal2-input" value="${t.duration}">
-<input id="swal-rentRate" class="swal2-input" value="${t.rentRate}">
-<input id="swal-annualIncome" class="swal2-input" value="${t.annualIncome}">
-<input id="swal-rentType" class="swal2-input" value="${t.rentType}">
-<input id="swal-note" class="swal2-input" value="${t.note}">
-<input id="swal-image" class="swal2-input" value="${t.image}">
-      `,
-      showCancelButton:true,
-      confirmButtonText:'บันทึก'
-    }).then(result=>{
-      if(result.isConfirmed){
-        const updated = {
-          name:document.getElementById('swal-name').value,
-          address:document.getElementById('swal-address').value,
-          contractNo:document.getElementById('swal-contract').value,
-          phone:document.getElementById('swal-phone').value,
-          email:document.getElementById('swal-email').value,
-          startDate:document.getElementById('swal-startDate').value,
-          duration:document.getElementById('swal-duration').value,
-          rentRate:document.getElementById('swal-rentRate').value,
-          annualIncome:document.getElementById('swal-annualIncome').value,
-          rentType:document.getElementById('swal-rentType').value,
-          note:document.getElementById('swal-note').value,
-          image:document.getElementById('swal-image').value
-        };
-        google.script.run.withSuccessHandler(()=>{
-          Swal.fire({icon:'success', title:'อัปเดตเรียบร้อย', timer:1500, showConfirmButton:false});
-          loadTenants();
-        }).updateTenant(index, updated);
-      }
-    });
-  }).getAllTenants();
-}
-
-// ลบผู้เช่า
-function deleteTenant(index){
-  Swal.fire({
-    title:"คุณแน่ใจหรือไม่?",
-    text:"เมื่อลบแล้วจะไม่สามารถกู้คืนได้!",
-    icon:"warning",
-    showCancelButton:true,
-    confirmButtonText:"ลบ",
-    cancelButtonText:"ยกเลิก"
-  }).then(result=>{
-    if(result.isConfirmed){
-      google.script.run.withSuccessHandler(()=>{
-        Swal.fire({icon:'success', title:'ลบแล้ว', timer:1500, showConfirmButton:false});
-        loadTenants();
-      }).deleteTenant(index);
-    }
-  });
-}
 </script>
 
 </body>
